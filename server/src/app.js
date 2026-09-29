@@ -19,10 +19,12 @@ function createApp({ store = null } = {}) {
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
 
+  // Case-insensitive match: Render URLs are lowercase in the browser but
+  // people often type capitals in CLIENT_ORIGIN (e.g. Shakti-textiles-4).
   const origins = (process.env.CLIENT_ORIGIN || 'http://localhost:5173')
-    .split(',').map((s) => s.trim()).filter(Boolean);
+    .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
   app.use('/api', cors({
-    origin: (origin, cb) => (!origin || origins.includes(origin) ? cb(null, true)
+    origin: (origin, cb) => (!origin || origins.includes(String(origin).toLowerCase()) ? cb(null, true)
       : cb(new Error('Not allowed by CORS'))),
     credentials: true,
   }));
