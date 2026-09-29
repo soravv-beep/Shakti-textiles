@@ -1,0 +1,18 @@
+# Netlify pe client ek Vite app hai jo client/ me rahti hai.
+# - command: pehle client ki dependencies install (warna "vite: not found"),
+#   phir build. Root package.json ka build script dono karta hai.
+# - publish: Vite ka output client/dist me banta hai (root dist NAHI).
+[build]
+  command = "npm run build"
+  publish = "client/dist"
+
+# Node 20 LTS — Vite 5 ke saath stable.
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA fallback — /products, /admin jaise deep links direct open ya refresh
+# karne pe bhi React Router ko hand over karo, warna Netlify 404 deta.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

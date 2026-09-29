@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+*.log
+uploads/
+.DS_Store
+
+# Runtime data (enquiries, admin accounts, content edits) — public repo
+# pe na jaye. Server first run pe khud seed ho jata hai.
+server/data/
+.freebuff/

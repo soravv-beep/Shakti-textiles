@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Brand design tokens (strict 4-color palette) ─────── */
+:root {
+  --ruby: #9B111E;
+  --blush: #FBE4E3;
+  --crimson: #D72638;
+  --bordeaux: #3F0D12;
+  --bordeaux-15: rgba(63, 13, 18, 0.15);
+  --bordeaux-10: rgba(63, 13, 18, 0.10);
+  --blush-25: rgba(251, 228, 227, 0.25);
+  --blush-15: rgba(251, 228, 227, 0.15);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: 'Inter', 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--blush);
+  color: var(--bordeaux);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tabular figures for every number/metric on the site */
+.tabular,
+td,
+th {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Shared building blocks */
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-ruby;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-crimson px-6 py-3 font-semibold text-blush transition-colors duration-200 hover:bg-ruby focus:outline-none focus-visible:ring-2 focus-visible:ring-ruby focus-visible:ring-offset-2 focus-visible:ring-offset-blush;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-bordeaux bg-transparent px-6 py-3 font-semibold text-bordeaux transition-colors duration-200 hover:bg-ruby hover:border-ruby hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-ruby focus-visible:ring-offset-2 focus-visible:ring-offset-blush;
+  }
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-blush bg-transparent px-6 py-3 font-semibold text-blush transition-colors duration-200 hover:bg-ruby hover:border-ruby hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blush focus-visible:ring-offset-2 focus-visible:ring-offset-bordeaux;
+  }
+  .card {
+    @apply rounded-xl border border-[rgba(63,13,18,0.10)] bg-white;
+  }
+  .pill {
+    @apply inline-flex items-center rounded-full bg-blush px-3 py-1 text-xs font-medium text-bordeaux;
+  }
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-bordeaux;
+  }
+  .field-input {
+    @apply w-full rounded-lg border border-[rgba(63,13,18,0.15)] bg-white px-3.5 py-2.5 text-bordeaux placeholder-[rgba(63,13,18,0.4)] transition-colors focus:border-ruby focus:outline-none focus:ring-1 focus:ring-ruby;
+  }
+  .field-error {
+    @apply mt-1.5 text-sm text-crimson;
+  }
+}
+
+/* Hero slider — gentle rise on each slide change */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-rise {
+  animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-rise-1 { animation-delay: 0.05s; }
+.hero-rise-2 { animation-delay: 0.15s; }
+.hero-rise-3 { animation-delay: 0.25s; }
+.hero-rise-4 { animation-delay: 0.35s; }
+
+/* Trusted-by logo marquee (seamless loop — content duplicated 2×) */
+@keyframes logo-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.logo-marquee {
+  animation: logo-marquee 32s linear infinite;
+}
