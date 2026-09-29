@@ -7,7 +7,7 @@
     "dev": "concurrently -n api,web -c red,magenta \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
     "devc": "node dev-clean.js && npm run dev",
     "dev-clean": "node dev-clean.js",
-    "build": "npm install --prefix client --include=dev && npm run build --prefix client",
+    "build": "npm install --prefix server && npm install --prefix client --include=dev && npm run build --prefix client",
     "start": "npm run start --prefix server",
     "seed": "npm run seed --prefix server",
     "install-all": "npm install && npm install --prefix server && npm install --prefix client"
